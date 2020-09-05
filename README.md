@@ -11,7 +11,7 @@ Java 1.8 +, IDE (Eclipse, IntellejIDEA), Maven 3.0 +, Git, Postman.
 
 #### > Architecture
 
-![Image Alt](./architecture.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/architecture.png)
 
 #### > H2 database configuration
 
@@ -68,7 +68,7 @@ What i learned from this is:
 
 Transaction is a series of actions that fail as a group or complete entirely as a group, all these actions should be rollback in case of any failure, but if all of them complete then the transaction should be permanently comitted.
 
-![Image Alt](./trx.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/trx.png)
 
 I'm simulating a case of money transfer from an account to another, later we'll see the implementation of the MoneyTransfer Spring Boot application, but for now, in our example the transaction code should be something like that.
 
@@ -98,7 +98,7 @@ I'm simulating a case of money transfer from an account to another, later we'll 
 
 Depending on the enviroment where you're managing the transaction, there are two types of transactions:
 
-![Image Alt](./types.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/types.png)
 
 ### 1. Global transaction
 
@@ -121,7 +121,7 @@ All transactions processing systems must implement:
 
 The ACID properties, in totality, provide a mechanism to ensure correctness and consistency of a database in a way such that each transaction is a group of operations that acts a single unit, produces consistent results, acts in isolation from other operations and updates that it makes are durably stored.
 
-![Image Alt](./acid.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/acid.png)
 
 ### > Atomicity
 
@@ -205,13 +205,13 @@ if this looks too complicated to you don't be discouraged, we'll explain this th
 
 What i mean by a **_consistent programming model_** is that Spring set a uniform API across all different transaction & persistence APIs, because obviously there is several different APIs involved on manage trans such as:
 
-![Image Alt](./transapis.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/transapis.png)
 
 Now, Imagine that you're using EclipseLink as your persistence provider, and you want to migrate to Hibernate,
 without spring you'd have to make code changes because they have different implementations for trans. management, but
 using Spring, there is no code changes are required, and you're using a simpler uniformAPi than any complex API.
 
-![Image Alt](./cpm.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/cpm.png)
 
 # Isolation levels
 
@@ -219,7 +219,7 @@ Remember Isolation from ACID properties, Spring supports isolation levels that h
 
 those isolation levels are:
 
-![Image Alt](./levels.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/levels.png)
 
 # Transaction management types
 
@@ -266,7 +266,7 @@ so when you're not using a proxy, here is what we have at runtime:
 ### Without proxy
 
 The method is invoked directly on that object reference
-![Image Alt](./no-proxy.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/no-proxy.png)
 
 ### With proxy
 
@@ -274,7 +274,7 @@ When a proxy is used and you invoke a method transferMoney on an object referenc
 
 At startup time, a new class is created, called proxy. This one is in charge of adding Transactional behavior as follows:
 
-![Image Alt](./proxy.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/proxy.png)
 
 The generated proxy class comes on top of AccountServiceImpl. It adds Transactional behavior to it.
 
@@ -566,21 +566,21 @@ public class ProgTrxTemplateAccountService implements IAccountService {
 
 #### Initilal state
 
-![Image Alt](./h2.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/h2.png)
 
 #### Making a POST request via POSTMAN: simulation of a succesful money transfer
 
-![Image Alt](./postreq.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/postreq.png)
 
 #### Transaction is commited permanently to database
 
-![Image Alt](./after.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/after.png)
 
 #### Transfer money to an inexistant account: simulation of rollback called when NoSuchElementException is occured
 
-![Image Alt](./rollbackforcing.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/rollbackforcing.png)
 
 #### NoSuchElementException shown in the console
 
-![Image Alt](./no such elemnt.png)
+![Image Alt](https://github.com/haffani/v4/blob/master/content/posts/spring-trx-management/no such elemnt.png)
 
